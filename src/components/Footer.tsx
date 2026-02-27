@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
+import { useLanguage } from "./Providers";
 
 const socialLinks = [
   {
@@ -31,18 +35,25 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const { t } = useLanguage();
+
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gray-900 dark:bg-black text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-bold font-[family-name:var(--font-playfair)] mb-4">
-              <span className="text-violet-400">HD</span> Personalized Creations
-            </h3>
+            <div className="mb-4">
+              <Image
+                src="/logo.png"
+                alt="HD Personalized Creations"
+                width={160}
+                height={60}
+                className="h-14 w-auto brightness-0 invert"
+              />
+            </div>
             <p className="text-gray-400 mb-4 max-w-md">
-              Creaciones únicas hechas con amor. Cada pieza es personalizada
-              especialmente para ti, convirtiendo tus ideas en regalos mágicos.
+              {t.footer.tagline}
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((item) => (
@@ -60,7 +71,7 @@ export function Footer() {
           {/* Quick Links */}
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wider mb-4">
-              Quick Links
+              {t.footer.quickLinks}
             </h4>
             <ul className="space-y-2">
               <li>
@@ -68,7 +79,7 @@ export function Footer() {
                   href="/gallery"
                   className="text-gray-400 hover:text-violet-400 transition-colors"
                 >
-                  Gallery
+                  {t.nav.gallery}
                 </Link>
               </li>
               <li>
@@ -76,7 +87,7 @@ export function Footer() {
                   href="/services"
                   className="text-gray-400 hover:text-violet-400 transition-colors"
                 >
-                  Services
+                  {t.nav.services}
                 </Link>
               </li>
               <li>
@@ -84,7 +95,7 @@ export function Footer() {
                   href="/how-it-works"
                   className="text-gray-400 hover:text-violet-400 transition-colors"
                 >
-                  How It Works
+                  {t.nav.howItWorks}
                 </Link>
               </li>
               <li>
@@ -92,7 +103,7 @@ export function Footer() {
                   href="/quote"
                   className="text-gray-400 hover:text-violet-400 transition-colors"
                 >
-                  Request Quote
+                  {t.nav.getQuote}
                 </Link>
               </li>
             </ul>
@@ -101,7 +112,7 @@ export function Footer() {
           {/* Contact */}
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wider mb-4">
-              Contact
+              {t.footer.contact}
             </h4>
             <ul className="space-y-2 text-gray-400">
               <li>Tampa, FL</li>
@@ -127,8 +138,7 @@ export function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm">
           <p>
-            © {new Date().getFullYear()} HD Personalized Creations. Made with 💜
-            in Tampa, FL
+            © {new Date().getFullYear()} HD Personalized Creations. {t.footer.madeWith}
           </p>
         </div>
       </div>
