@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Enable class-based dark mode for next-themes */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* Brand Colors - HD Personalized Creations */
   --color-violet-50: #f5f3ff;
@@ -147,16 +150,4 @@ html {
 /* Details/summary styling */
 details summary::-webkit-details-marker {
   display: none;
-}
-
-/* Transition for theme changes */
-* {
-  transition-property: background-color, border-color, color;
-  transition-timing-function: ease-in-out;
-  transition-duration: 150ms;
-}
-
-/* Disable transitions on theme change to prevent flash */
-[data-theme-transition="false"] * {
-  transition: none !important;
 }
