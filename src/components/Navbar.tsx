@@ -2,14 +2,20 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { useLanguage } from "./Providers";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const { locale, setLocale, t } = useLanguage();
+
+  // Avoid hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const navigation = [
     { name: t.nav.home, href: "/" },
@@ -20,18 +26,21 @@ export function Navbar() {
     { name: t.nav.contact, href: "/contact" },
   ];
 
+  const currentTheme = resolvedTheme || theme;
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b border-violet-100 dark:border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center">
             <Image
               src="/logo.png"
               alt="HD Personalized Creations"
-              width={140}
-              height={50}
-              className="h-12 w-auto"
+              width={180}
+              height={60}
+              className="h-14 w-auto object-contain"
+              style={{ mixBlendMode: 'multiply' }}
               priority
             />
           </Link>
@@ -48,30 +57,33 @@ export function Navbar() {
               </Link>
             ))}
 
-            {/* Language Toggle */}
+            {/* Language Toggle - shows current language, click to switch */}
             <button
               onClick={() => setLocale(locale === "en" ? "es" : "en")}
               className="px-3 py-1.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-violet-100 dark:hover:bg-violet-900 transition-colors"
+              title={locale === "en" ? "Cambiar a Español" : "Switch to English"}
             >
-              {locale === "en" ? "🇪🇸 ES" : "🇺🇸 EN"}
+              {locale === "en" ? "🇺🇸 EN" : "🇪🇸 ES"}
             </button>
 
             {/* Theme Toggle */}
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-violet-100 dark:hover:bg-violet-900 transition-colors"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? (
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              ) : (
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-              )}
-            </button>
+            {mounted && (
+              <button
+                onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+                className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-violet-100 dark:hover:bg-violet-900 transition-colors"
+                aria-label="Toggle theme"
+              >
+                {currentTheme === "dark" ? (
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                  </svg>
+                )}
+              </button>
+            )}
 
             <Link
               href="/quote"
@@ -86,19 +98,21 @@ export function Navbar() {
             {/* Language Toggle Mobile */}
             <button
               onClick={() => setLocale(locale === "en" ? "es" : "en")}
-              className="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800"
+              className="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300"
             >
-              {locale === "en" ? "ES" : "EN"}
+              {locale === "en" ? "EN" : "ES"}
             </button>
 
             {/* Theme Toggle Mobile */}
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-full bg-gray-100 dark:bg-gray-800"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? "☀️" : "🌙"}
-            </button>
+            {mounted && (
+              <button
+                onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+                className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300"
+                aria-label="Toggle theme"
+              >
+                {currentTheme === "dark" ? "☀️" : "🌙"}
+              </button>
+            )}
 
             <button
               onClick={() => setIsOpen(!isOpen)}
