@@ -45,11 +45,11 @@ export function Footer() {
           <div className="col-span-1 md:col-span-2">
             <div className="mb-4">
               <Image
-                src="/logo.png"
-                alt="HD Personalized Creations"
+                src="/logo-white.png"
+                alt="Personalized Creations"
                 width={160}
                 height={60}
-                className="h-14 w-auto brightness-0 invert"
+                className="h-14 w-auto"
               />
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
