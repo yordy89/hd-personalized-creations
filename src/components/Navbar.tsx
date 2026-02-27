@@ -27,21 +27,34 @@ export function Navbar() {
   ];
 
   const currentTheme = resolvedTheme || theme;
+  const isDark = currentTheme === "dark";
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b border-violet-100 dark:border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          {/* Logo */}
+          {/* Logo - conditional based on theme */}
           <Link href="/" className="flex items-center">
-            <Image
-              src="/logo.png"
-              alt="HD Personalized Creations"
-              width={180}
-              height={60}
-              className="h-14 w-auto object-contain dark:brightness-0 dark:invert"
-              priority
-            />
+            {mounted ? (
+              <Image
+                src={isDark ? "/logo-white.png" : "/logo.png"}
+                alt="HD Personalized Creations"
+                width={180}
+                height={60}
+                className="h-14 w-auto object-contain"
+                priority
+              />
+            ) : (
+              // Placeholder during hydration
+              <Image
+                src="/logo.png"
+                alt="HD Personalized Creations"
+                width={180}
+                height={60}
+                className="h-14 w-auto object-contain"
+                priority
+              />
+            )}
           </Link>
 
           {/* Desktop Navigation */}
@@ -68,11 +81,11 @@ export function Navbar() {
             {/* Theme Toggle */}
             {mounted && (
               <button
-                onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+                onClick={() => setTheme(isDark ? "light" : "dark")}
                 className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-violet-100 dark:hover:bg-violet-900 transition-colors"
                 aria-label="Toggle theme"
               >
-                {currentTheme === "dark" ? (
+                {isDark ? (
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
@@ -105,11 +118,11 @@ export function Navbar() {
             {/* Theme Toggle Mobile */}
             {mounted && (
               <button
-                onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+                onClick={() => setTheme(isDark ? "light" : "dark")}
                 className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300"
                 aria-label="Toggle theme"
               >
-                {currentTheme === "dark" ? "☀️" : "🌙"}
+                {isDark ? "☀️" : "🌙"}
               </button>
             )}
 
