@@ -29,12 +29,8 @@ export const metadata: Metadata = {
     "glitter tumblers",
   ],
   icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.png", type: "image/png" },
-    ],
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/favicon.ico",
+    apple: "/icon.png",
   },
   openGraph: {
     title: "HD Personalized Creations",
