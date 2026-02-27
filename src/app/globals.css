@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
-/* Enable class-based dark mode for next-themes */
-@custom-variant dark (&:where(.dark, .dark *));
+/* Enable class-based dark mode for next-themes (selector-based) */
+@custom-variant dark (&:is(.dark *));
 
 @theme {
   /* Brand Colors - HD Personalized Creations */
