@@ -1,48 +1,56 @@
+"use client";
+
 import Link from "next/link";
+import { useLanguage } from "@/components/Providers";
 
 export default function ContactPage() {
+  const { locale, t } = useLanguage();
+
   return (
-    <div className="min-h-screen pt-24 pb-12 bg-gradient-to-b from-violet-50 to-white">
+    <div className="min-h-screen pt-24 pb-12 bg-gradient-to-b from-violet-50 to-white dark:from-gray-950 dark:to-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-playfair)] text-gray-900 mb-4">
-            <span className="text-gradient">Contáctanos</span>
+          <h1 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-playfair)] text-gray-900 dark:text-white mb-4">
+            <span className="text-gradient">{locale === "es" ? "Contáctanos" : "Contact Us"}</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            ¿Tienes preguntas? ¿Quieres hacer un pedido? Estamos aquí para
-            ayudarte.
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            {locale === "es"
+              ? "¿Tienes preguntas? ¿Quieres hacer un pedido? Estamos aquí para ayudarte."
+              : "Have questions? Want to place an order? We're here to help."}
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
           {/* Contact Info */}
           <div className="space-y-8">
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                Información de Contacto
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                {locale === "es" ? "Información de Contacto" : "Contact Information"}
               </h2>
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-violet-100 flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-violet-100 dark:bg-violet-900 flex items-center justify-center flex-shrink-0">
                     <span className="text-2xl">📍</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Ubicación</h3>
-                    <p className="text-gray-600">Tampa, Florida</p>
+                    <h3 className="font-semibold text-gray-900 dark:text-white">
+                      {locale === "es" ? "Ubicación" : "Location"}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300">Tampa, Florida</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-violet-100 flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-violet-100 dark:bg-violet-900 flex items-center justify-center flex-shrink-0">
                     <span className="text-2xl">📧</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Email</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-white">Email</h3>
                     <a
                       href="mailto:hello@hdpersonalized.com"
-                      className="text-violet-600 hover:text-violet-700"
+                      className="text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300"
                     >
                       hello@hdpersonalized.com
                     </a>
@@ -50,14 +58,16 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-violet-100 flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-violet-100 dark:bg-violet-900 flex items-center justify-center flex-shrink-0">
                     <span className="text-2xl">📱</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Teléfono</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-white">
+                      {locale === "es" ? "Teléfono" : "Phone"}
+                    </h3>
                     <a
                       href="tel:+1234567890"
-                      className="text-violet-600 hover:text-violet-700"
+                      className="text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300"
                     >
                       (123) 456-7890
                     </a>
@@ -67,9 +77,9 @@ export default function ContactPage() {
             </div>
 
             {/* Social Media */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                Síguenos
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                {locale === "es" ? "Síguenos" : "Follow Us"}
               </h2>
               <div className="flex gap-4">
                 <a
@@ -98,7 +108,7 @@ export default function ContactPage() {
                 </a>
                 <a
                   href="#"
-                  className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white hover:shadow-lg transition-shadow"
+                  className="w-12 h-12 rounded-full bg-black dark:bg-white dark:text-black flex items-center justify-center text-white hover:shadow-lg transition-shadow"
                 >
                   <svg
                     className="w-6 h-6"
@@ -112,22 +122,22 @@ export default function ContactPage() {
             </div>
 
             {/* Hours */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                Horario de Atención
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                {locale === "es" ? "Horario de Atención" : "Business Hours"}
               </h2>
-              <div className="space-y-2 text-gray-600">
+              <div className="space-y-2 text-gray-600 dark:text-gray-300">
                 <p className="flex justify-between">
-                  <span>Lunes - Viernes</span>
+                  <span>{locale === "es" ? "Lunes - Viernes" : "Monday - Friday"}</span>
                   <span className="font-medium">9:00 AM - 6:00 PM</span>
                 </p>
                 <p className="flex justify-between">
-                  <span>Sábado</span>
+                  <span>{locale === "es" ? "Sábado" : "Saturday"}</span>
                   <span className="font-medium">10:00 AM - 4:00 PM</span>
                 </p>
                 <p className="flex justify-between">
-                  <span>Domingo</span>
-                  <span className="font-medium">Cerrado</span>
+                  <span>{locale === "es" ? "Domingo" : "Sunday"}</span>
+                  <span className="font-medium">{locale === "es" ? "Cerrado" : "Closed"}</span>
                 </p>
               </div>
             </div>
@@ -137,59 +147,63 @@ export default function ContactPage() {
           <div className="space-y-8">
             <div className="bg-gradient-to-br from-violet-600 to-purple-700 rounded-2xl p-8 text-white">
               <h2 className="text-2xl font-bold mb-4">
-                ¿Listo para ordenar?
+                {locale === "es" ? "¿Listo para ordenar?" : "Ready to order?"}
               </h2>
               <p className="text-violet-100 mb-6">
-                La forma más rápida de empezar es llenar nuestro formulario de
-                cotización. Te responderemos en menos de 24 horas.
+                {locale === "es"
+                  ? "La forma más rápida de empezar es llenar nuestro formulario de cotización. Te responderemos en menos de 24 horas."
+                  : "The quickest way to start is by filling out our quote form. We'll respond within 24 hours."}
               </p>
               <Link
                 href="/quote"
                 className="bg-white text-violet-600 px-8 py-3 rounded-full font-semibold hover:bg-violet-50 transition-colors inline-block"
               >
-                Solicitar Cotización ✨
+                {t.nav.getQuote} ✨
               </Link>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                Preguntas Frecuentes
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                {locale === "es" ? "Preguntas Frecuentes" : "Frequently Asked Questions"}
               </h2>
               <div className="space-y-4">
                 <details className="group">
-                  <summary className="cursor-pointer font-medium text-gray-900 flex justify-between items-center">
-                    ¿Cuánto tiempo tarda un pedido?
-                    <span className="group-open:rotate-180 transition-transform">
+                  <summary className="cursor-pointer font-medium text-gray-900 dark:text-white flex justify-between items-center">
+                    {locale === "es" ? "¿Cuánto tiempo tarda un pedido?" : "How long does an order take?"}
+                    <span className="group-open:rotate-180 transition-transform text-violet-600">
                       ▼
                     </span>
                   </summary>
-                  <p className="mt-2 text-gray-600 pl-4">
-                    Generalmente entre 5-7 días hábiles, dependiendo del diseño
-                    y la cantidad.
+                  <p className="mt-2 text-gray-600 dark:text-gray-300 pl-4">
+                    {locale === "es"
+                      ? "Generalmente entre 5-7 días hábiles, dependiendo del diseño y la cantidad."
+                      : "Generally between 5-7 business days, depending on design and quantity."}
                   </p>
                 </details>
                 <details className="group">
-                  <summary className="cursor-pointer font-medium text-gray-900 flex justify-between items-center">
-                    ¿Hacen envíos?
-                    <span className="group-open:rotate-180 transition-transform">
+                  <summary className="cursor-pointer font-medium text-gray-900 dark:text-white flex justify-between items-center">
+                    {locale === "es" ? "¿Hacen envíos?" : "Do you ship?"}
+                    <span className="group-open:rotate-180 transition-transform text-violet-600">
                       ▼
                     </span>
                   </summary>
-                  <p className="mt-2 text-gray-600 pl-4">
-                    Sí, enviamos a todo Estados Unidos. También ofrecemos pickup
-                    local en Tampa.
+                  <p className="mt-2 text-gray-600 dark:text-gray-300 pl-4">
+                    {locale === "es"
+                      ? "Sí, enviamos a todo Estados Unidos. También ofrecemos pickup local en Tampa."
+                      : "Yes, we ship throughout the United States. We also offer local pickup in Tampa."}
                   </p>
                 </details>
                 <details className="group">
-                  <summary className="cursor-pointer font-medium text-gray-900 flex justify-between items-center">
-                    ¿Puedo ver el diseño antes?
-                    <span className="group-open:rotate-180 transition-transform">
+                  <summary className="cursor-pointer font-medium text-gray-900 dark:text-white flex justify-between items-center">
+                    {locale === "es" ? "¿Puedo ver el diseño antes?" : "Can I see the design first?"}
+                    <span className="group-open:rotate-180 transition-transform text-violet-600">
                       ▼
                     </span>
                   </summary>
-                  <p className="mt-2 text-gray-600 pl-4">
-                    ¡Claro! Siempre enviamos una vista previa del diseño para tu
-                    aprobación antes de empezar.
+                  <p className="mt-2 text-gray-600 dark:text-gray-300 pl-4">
+                    {locale === "es"
+                      ? "¡Claro! Siempre enviamos una vista previa del diseño para tu aprobación antes de empezar."
+                      : "Of course! We always send a design preview for your approval before starting."}
                   </p>
                 </details>
               </div>

@@ -39,8 +39,7 @@ export function Navbar() {
               alt="HD Personalized Creations"
               width={180}
               height={60}
-              className="h-14 w-auto object-contain"
-              style={{ mixBlendMode: 'multiply' }}
+              className="h-14 w-auto object-contain dark:brightness-0 dark:invert"
               priority
             />
           </Link>

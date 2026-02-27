@@ -28,6 +28,11 @@ export const metadata: Metadata = {
     "custom creations",
     "glitter tumblers",
   ],
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
   openGraph: {
     title: "HD Personalized Creations",
     description: "Creaciones personalizadas únicas hechas con amor",
